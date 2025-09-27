@@ -43,7 +43,7 @@ jobs:
       - name: Deploy space_invaders build files
         run: |
           echo "Attempting to build the game"
-          python -m pygbag --build $GITHUB_WORKSPACE/space_invaders/main.py
+          python -m pygbag --build $GITHUB_WORKSPACE/space_invaders/space_invaders/main.py
           mkdir -p build_files/space_invaders
           cp -r space_invaders/build/web/* build_files/space_invaders 
           echo "Successfully built the game and compiled to WebAssembly"
