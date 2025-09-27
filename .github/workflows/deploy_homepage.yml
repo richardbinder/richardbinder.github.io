@@ -16,11 +16,8 @@ jobs:
           submodules: recursive
         name: Checkout
 
-      - name: Copy Homepage files
-        run: cp -r homepage/* build_files
-
       - name : Upload to GitHub pages branch gh-pages
         uses: JamesIves/github-pages-deploy-action@4.1.7
         with:
           branch: gh-pages
-          folder: build_files
+          folder: homepage
