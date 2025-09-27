@@ -12,7 +12,7 @@ jobs:
 
     steps:
     - name: Copy Homepage files
-      run: cp -r homepage/* build_files
+      run: cp -r $GITHUB_WORKSPACE/homepage/* build_files
 
     - name : Upload to GitHub pages branch gh-pages
       uses: JamesIves/github-pages-deploy-action@4.1.7
