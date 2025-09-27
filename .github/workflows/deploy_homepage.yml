@@ -16,8 +16,41 @@ jobs:
           submodules: recursive
         name: Checkout
 
+      - name: Git Submodule Update
+        run: |
+          git pull --recurse-submodules
+          git submodule update --remote --recursive
+
+      - name: Deploy homepage
+        run: |
+          mkdir -p build_files
+          cp -r homepage/* build_files 
+
+      - name: Install pygbag
+        run: |
+          echo "Attempting to install pygbag"
+          python -m pip install pygbag
+          echo "Successfully installed pygbag"
+
+      - name: Deploy tictactoe build files
+        run: |
+          echo "Attempting to build the game"
+          python -m pygbag --build $GITHUB_WORKSPACE/tictactoe/main.py
+          mkdir -p build_files/tictactoe
+          cp -r tictactoe/build/web/* build_files/tictactoe 
+          echo "Successfully built the game and compiled to WebAssembly"
+
+      - name: Deploy space_invaders build files
+        run: |
+          echo "Attempting to build the game"
+          python -m pygbag --build $GITHUB_WORKSPACE/space_invaders/main.py
+          mkdir -p build_files/space_invaders
+          cp -r space_invaders/build/web/* build_files/space_invaders 
+          echo "Successfully built the game and compiled to WebAssembly"
+
       - name : Upload to GitHub pages branch gh-pages
         uses: JamesIves/github-pages-deploy-action@4.1.7
         with:
           branch: gh-pages
-          folder: homepage
+          clean: false
+          folder: build_files
