@@ -30,7 +30,8 @@ jobs:
             python -m pygbag --build $GITHUB_WORKSPACE/tictactoe/main.py
             mkdir -p build_files/tictactoe
             cp -r tictactoe/build/web/* build_files/tictactoe 
-            echo "Successfully build the game and complied to WebAssembly"
+            cp -r homepage/* build_files
+            echo "Successfully build the game and compiled to WebAssembly"
 
     - name : Upload to GitHub pages branch gh-pages
       uses: JamesIves/github-pages-deploy-action@4.1.7
