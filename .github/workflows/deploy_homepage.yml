@@ -1,0 +1,21 @@
+name: Deploy Homepage
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build-homepage:
+    name: HomePage
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Copy Homepage files
+      run: cp -r homepage/* build_files
+
+    - name : Upload to GitHub pages branch gh-pages
+      uses: JamesIves/github-pages-deploy-action@4.1.7
+      with:
+        branch: gh-pages
+        folder: build_files
